@@ -1,6 +1,7 @@
 ﻿using ASP.NETCoreIdentityCustom.Areas.Identity.Data;
 using ASP.NETCoreIdentityCustom.Core.Repositories;
 using ASP.NETCoreIdentityCustom.Core.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -18,6 +19,7 @@ namespace ASP.NETCoreIdentityCustom.Controllers
             _signInManager = signInManager;
         }
 
+        [Authorize(Policy = "RequireAdmin")]
         public IActionResult Index()
         {
             var users = _unitOfWork.User.GetUsers();
